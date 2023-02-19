@@ -1,0 +1,59 @@
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+  <div nz-row>
+    <div nz-col>
+
+      <nz-form-item>
+        <p class="name">Наименование</p>
+        <nz-form-control>
+          <input nz-input [formControlName]="'nameField'" [attr.id]="'nameField'" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <p class="name">Краткое наименование</p>
+        <nz-form-control>
+          <input nz-input [formControlName]="'nameField'" [attr.id]="'nameField'" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <p class="name">Код категории</p>
+        <nz-form-control>
+          <input nz-input [formControlName]="'nameField'" [attr.id]="'nameField'" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <p class="name">Теги</p>
+        <div class="select-wrapper">
+          <nz-select [nzBorderless]="true" [(ngModel)]="multipleValue" [nzSize]="size" nzMode="multiple">
+            <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label"
+              [nzValue]="option.value"></nz-option>
+          </nz-select>
+          <div class="arrow-box">
+            <div class="arrow-inside">
+              <div class="arrow">
+                <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0L5 5L10 0H0Z" fill="#9C9EAD" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nz-form-item>
+
+      <nz-form-item class="description">
+        <p class="name">Описание</p>
+        <nz-form-control>
+          <textarea nz-input class="textArea" [formControlName]="'nameField'" [attr.id]="'nameField'"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <p class="name">Актуальность</p>
+        <nz-switch [(ngModel)]="switchValue"></nz-switch>
+      </nz-form-item>
+
+    </div>
+  </div>
+</form>
