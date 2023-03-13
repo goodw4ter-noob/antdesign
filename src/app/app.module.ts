@@ -21,6 +21,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { SwitcherComponent } from './switcher/switcher.component';
+import { CategoryComponent } from './category/category.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 registerLocaleData(en);
 
@@ -29,7 +31,8 @@ registerLocaleData(en);
     AppComponent,
     GlobalLayoutComponent,
     MainFormComponent,
-    SwitcherComponent
+    SwitcherComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ registerLocaleData(en);
     NzIconModule,
     NzInputModule,
     NzSelectModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzModalModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

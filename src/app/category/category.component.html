@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="imgbox"></div>
+  <div class="text">
+    <p class="p1">Пока что у данной категории нет ни одного шаблона</p>
+    <p class="p2">Вы можете прикрепить новый шаблон к категории</p>
+  </div>
+  <button nz-button nzType="primary" (click)="showModal()">
+    <span>+ Прикрепить</span>
+  </button>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Добавление категории" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+  [nzOkLoading]="isOkLoading" [nzContent]="modalForm" [nzFooter]="modalFooter" nzWidth="720px" [nzBodyStyle]="{ height: '382px' }">
+  <ng-template #modalTitle>Добавление категории</ng-template>
+
+  <ng-template #modalForm>
+    <form #modalContent nz-form autocomplete="off" [nzNoColon]="true" >
+
+      <nz-form-item class="card__item">
+        <nz-form-label [nzSpan]="8" nzFor="name">Код родительской категории</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="card__item">
+        <nz-form-label [nzSpan]="8" nzFor="name">Код категории</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="card__item">
+        <nz-form-label [nzSpan]="8" nzFor="name">Наименование</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="card__item">
+        <nz-form-label [nzSpan]="8" nzFor="name">Описание</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="card__item">
+        <nz-form-label [nzSpan]="8" nzFor="name">Активен</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="card__item">
+        <nz-form-label [nzSpan]="8" nzFor="name">Разрешить классификацию</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+
+    </form>
+  </ng-template>
+
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Закрыть</button>
+    <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isOkLoading">Добавить</button>
+  </ng-template>
+</nz-modal>
