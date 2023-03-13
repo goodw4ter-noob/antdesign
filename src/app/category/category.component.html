@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="imgbox"></div>
+  <img src="https://www.figma.com/file/38Udsvy41Aw46NJ2vSneKB/%D0%9D%D0%A1%D0%98-2.0?node-id=3865%3A129258&t=A69WNWyO6VdUFsoX-4" alt="">
   <div class="text">
     <p class="p1">Пока что у данной категории нет ни одного шаблона</p>
     <p class="p2">Вы можете прикрепить новый шаблон к категории</p>
@@ -9,61 +9,62 @@
   </button>
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Добавление категории" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
-  [nzOkLoading]="isOkLoading" [nzContent]="modalForm" [nzFooter]="modalFooter" nzWidth="720px" [nzBodyStyle]="{ height: '382px' }">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Добавление категории" (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk(form)" [nzOkLoading]="isOkLoading" [nzContent]="modalForm" nzWidth="720px">
   <ng-template #modalTitle>Добавление категории</ng-template>
 
   <ng-template #modalForm>
-    <form #modalContent nz-form autocomplete="off" [nzNoColon]="true" >
+    <form #modalContent nz-form autocomplete="off" [nzNoColon]="true" [formGroup]="form" (onSubmit)="handleOk(form)">
 
       <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="name">Код родительской категории</nz-form-label>
+        <nz-form-label [nzSpan]="8" nzFor="parentCategoryCode" nzRequired>Код родительской категории</nz-form-label>
         <nz-form-control [nzSpan]="16">
-          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+          <input id="parentCategoryCode" type="text" nz-input formControlName="parentCategoryCode" nzSize="large" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="name">Код категории</nz-form-label>
+        <nz-form-label [nzSpan]="8" nzFor="categoryCode">Код категории</nz-form-label>
         <nz-form-control [nzSpan]="16">
-          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+          <input id="categoryCode" type="text" nz-input formControlName="categoryCode" nzSize="large" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="name">Наименование</nz-form-label>
+        <nz-form-label [nzSpan]="8" nzFor="title" nzRequired>Наименование</nz-form-label>
         <nz-form-control [nzSpan]="16">
-          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+          <input id="title" type="text" nz-input formControlName="title" nzSize="large" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="name">Описание</nz-form-label>
+        <nz-form-label [nzSpan]="8" nzFor="description">Описание</nz-form-label>
         <nz-form-control [nzSpan]="16">
-          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+          <input id="description" type="text" nz-input formControlName="description" nzSize="large" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="name">Активен</nz-form-label>
+        <nz-form-label [nzSpan]="8" nzFor="isAvailable">Активен</nz-form-label>
         <nz-form-control [nzSpan]="16">
-          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+          <input id="isAvailable" type="text" nz-input formControlName="isAvailable" nzSize="large" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="name">Разрешить классификацию</nz-form-label>
+        <nz-form-label [nzSpan]="8" nzFor="isClassificationAllowed">Разрешить классификацию</nz-form-label>
         <nz-form-control [nzSpan]="16">
-          <input id="name" type="text" nz-input formControlName="name" nzSize="large" />
+          <input id="isClassificationAllowed" type="text" nz-input formControlName="isClassificationAllowed"
+            nzSize="large" />
         </nz-form-control>
       </nz-form-item>
 
     </form>
   </ng-template>
 
-
-  <ng-template #modalFooter>
+  <ng-template class="footer" nzHight="300px">
     <button nz-button nzType="default" (click)="handleCancel()">Закрыть</button>
-    <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isOkLoading">Добавить</button>
+    <button nz-button nzType="primary" type="submit" [nzLoading]="isOkLoading">Добавить</button>
   </ng-template>
+
 </nz-modal>
