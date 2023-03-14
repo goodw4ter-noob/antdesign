@@ -1,5 +1,7 @@
 <div class="container">
-  <img src="https://www.figma.com/file/38Udsvy41Aw46NJ2vSneKB/%D0%9D%D0%A1%D0%98-2.0?node-id=3865%3A129258&t=A69WNWyO6VdUFsoX-4" alt="">
+  <div class="imgbox">
+    <span nz-icon [nzType]="item.iconType" nz-tooltip [nzTooltipTitle]="item.name"></span>
+  </div>
   <div class="text">
     <p class="p1">Пока что у данной категории нет ни одного шаблона</p>
     <p class="p2">Вы можете прикрепить новый шаблон к категории</p>
@@ -7,14 +9,19 @@
   <button nz-button nzType="primary" (click)="showModal()">
     <span>+ Прикрепить</span>
   </button>
+  <button nz-button [nzType]="nzType" (click)="fileInput.click()" type="button">
+    <span nz-icon nzType="upload" nzTheme="outline"></span>
+    Импорт
+  </button>
+  <input class="form-control" #fileInput hidden type="file" (change)="onUpload($event)" accept=".csv, .tsv, .xlsx" />
 </div>
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Добавление категории" (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk(form)" [nzOkLoading]="isOkLoading" [nzContent]="modalForm" nzWidth="720px">
+  [nzOkLoading]="isOkLoading" [nzContent]="modalForm" nzWidth="720px" [nzFooter]="modalFooter">
   <ng-template #modalTitle>Добавление категории</ng-template>
 
   <ng-template #modalForm>
-    <form #modalContent nz-form autocomplete="off" [nzNoColon]="true" [formGroup]="form" (onSubmit)="handleOk(form)">
+    <form nz-form autocomplete="off" [nzNoColon]="true" [formGroup]="form" nzDisableAutoTips="true">
 
       <nz-form-item class="card__item">
         <nz-form-label [nzSpan]="8" nzFor="parentCategoryCode" nzRequired>Код родительской категории</nz-form-label>
@@ -37,34 +44,34 @@
         </nz-form-control>
       </nz-form-item>
 
-      <nz-form-item class="card__item">
+      <nz-form-item class="card__item_description">
         <nz-form-label [nzSpan]="8" nzFor="description">Описание</nz-form-label>
         <nz-form-control [nzSpan]="16">
-          <input id="description" type="text" nz-input formControlName="description" nzSize="large" />
+          <textarea nz-input class="card__input" formControlName="description" [attr.id]="'nameField'"></textarea>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item class="card__item">
         <nz-form-label [nzSpan]="8" nzFor="isAvailable">Активен</nz-form-label>
         <nz-form-control [nzSpan]="16">
-          <input id="isAvailable" type="text" nz-input formControlName="isAvailable" nzSize="large" />
+          <nz-switch formControlName="isAvailable"></nz-switch>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item class="card__item">
         <nz-form-label [nzSpan]="8" nzFor="isClassificationAllowed">Разрешить классификацию</nz-form-label>
         <nz-form-control [nzSpan]="16">
-          <input id="isClassificationAllowed" type="text" nz-input formControlName="isClassificationAllowed"
-            nzSize="large" />
+          <nz-switch formControlName="isClassificationAllowed"></nz-switch>
         </nz-form-control>
       </nz-form-item>
 
     </form>
   </ng-template>
 
-  <ng-template class="footer" nzHight="300px">
+  <ng-template class="footer" #modalFooter>
     <button nz-button nzType="default" (click)="handleCancel()">Закрыть</button>
-    <button nz-button nzType="primary" type="submit" [nzLoading]="isOkLoading">Добавить</button>
+    <button nz-button nzType="primary" type="submit" [nzLoading]="isOkLoading"
+      (click)="handleOk(form)">Добавить</button>
   </ng-template>
 
 </nz-modal>

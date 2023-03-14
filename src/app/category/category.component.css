@@ -17,6 +17,13 @@
   border-radius: 16px;
 }
 
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .p1 {
   font-weight: 500;
   font-size: 16px;
@@ -33,20 +40,36 @@
 }
 
 .imgbox {
-  width: 48px;
-  height: 48px;
-  background: blue;
+  display: flex;
+  align-items: center;
+  height: 3rem;
 }
 
-.modal {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
+.imgbox [nz-icon] {
+  text-align: center;
+  font-size: 48px;
+}
 
-  /* position: absolute; */
-  width: 720px;
-  height: 509px;
-  left: 360px;
-  top: 184px;
+.card__item {
+  display: flex;
+  flex-direction: row;
+  height: 52px;
+  align-self: stretch;
+}
+
+.card__item_description {
+  height: 78px;
+}
+
+nz-form-label {
+  text-align: start;
+}
+
+.card__input {
+  height: 72px;
+  resize: none;
+}
+
+.ant-form-item {
+  margin-bottom: 0;
 }
