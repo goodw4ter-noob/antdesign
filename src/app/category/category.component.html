@@ -7,71 +7,31 @@
     <p class="p2">Вы можете прикрепить новый шаблон к категории</p>
   </div>
   <button nz-button nzType="primary" (click)="showModal()">
-    <span>+ Прикрепить</span>
+    <span>+ Добавить</span>
   </button>
-  <button nz-button [nzType]="nzType" (click)="fileInput.click()" type="button">
-    <span nz-icon nzType="upload" nzTheme="outline"></span>
-    Импорт
-  </button>
-  <input class="form-control" #fileInput hidden type="file" (change)="onUpload($event)" accept=".csv, .tsv, .xlsx" />
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Добавление категории" (nzOnCancel)="handleCancel()"
-  [nzOkLoading]="isOkLoading" [nzContent]="modalForm" nzWidth="720px" [nzFooter]="modalFooter">
-  <ng-template #modalTitle>Добавление категории</ng-template>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Импорт файла" (nzOnCancel)="handleCancel()" [nzOkLoading]="isOkLoading"
+  [nzContent]="modalForm" nzWidth="572px" [nzFooter]="modalFooter">
+  <ng-template #modalTitle>Импорт файла</ng-template>
 
   <ng-template #modalForm>
-    <form nz-form autocomplete="off" [nzNoColon]="true" [formGroup]="form" nzDisableAutoTips="true">
+    <p>Скачайте шаблон загрузки (в формате <a href="">Excel</a> или <a href="">CSV</a>), заполните и загрузите файл в
+      форму ниже:</p>
 
-      <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="parentCategoryCode" nzRequired>Код родительской категории</nz-form-label>
-        <nz-form-control [nzSpan]="16">
-          <input id="parentCategoryCode" type="text" nz-input formControlName="parentCategoryCode" nzSize="large" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="categoryCode">Код категории</nz-form-label>
-        <nz-form-control [nzSpan]="16">
-          <input id="categoryCode" type="text" nz-input formControlName="categoryCode" nzSize="large" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="title" nzRequired>Наименование</nz-form-label>
-        <nz-form-control [nzSpan]="16">
-          <input id="title" type="text" nz-input formControlName="title" nzSize="large" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item class="card__item_description">
-        <nz-form-label [nzSpan]="8" nzFor="description">Описание</nz-form-label>
-        <nz-form-control [nzSpan]="16">
-          <textarea nz-input class="card__input" formControlName="description" [attr.id]="'nameField'"></textarea>
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="isAvailable">Активен</nz-form-label>
-        <nz-form-control [nzSpan]="16">
-          <nz-switch formControlName="isAvailable"></nz-switch>
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item class="card__item">
-        <nz-form-label [nzSpan]="8" nzFor="isClassificationAllowed">Разрешить классификацию</nz-form-label>
-        <nz-form-control [nzSpan]="16">
-          <nz-switch formControlName="isClassificationAllowed"></nz-switch>
-        </nz-form-control>
-      </nz-form-item>
-
-    </form>
+    <nz-upload nzType="drag" [nzMultiple]="true" nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      (nzChange)="handleChange($event)">
+      <p class="ant-upload-drag-icon">
+        <span nz-icon nzType="inbox"></span>
+      </p>
+      <p class="ant-upload-text">Нажмите или перетащите файл в эту область, чтобы загрузить</p>
+      <p class="ant-upload-hint">Поддержка одиночной или массовой загрузки.</p>
+    </nz-upload>
   </ng-template>
 
   <ng-template class="footer" #modalFooter>
     <button nz-button nzType="default" (click)="handleCancel()">Закрыть</button>
-    <button nz-button nzType="primary" type="submit" [nzLoading]="isOkLoading"
-      (click)="handleOk(form)">Добавить</button>
+    <button nz-button nzType="primary" type="submit" [nzLoading]="isOkLoading" (click)="submitData()">Добавить</button>
   </ng-template>
 
 </nz-modal>

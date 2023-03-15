@@ -24,6 +24,8 @@ import { SwitcherComponent } from './switcher/switcher.component';
 import { CategoryComponent } from './category/category.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 registerLocaleData(en);
 
@@ -51,7 +53,9 @@ registerLocaleData(en);
     NzSelectModule,
     NzSwitchModule,
     NzModalModule,
-    NzToolTipModule
+    NzToolTipModule,
+    NzUploadModule,
+    NzMessageModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

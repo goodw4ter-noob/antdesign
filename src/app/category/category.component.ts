@@ -2,7 +2,9 @@ import { Component, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NzButtonType } from 'ng-zorro-antd/button';
 import { NzIconService } from 'ng-zorro-antd/icon';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { searchLiteral } from './items';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-category',
@@ -10,21 +12,12 @@ import { searchLiteral } from './items';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent {
-  public fileChanged = new EventEmitter<Blob>()
+  // [nzMultiple]="true"
   isVisible = false;
   isOkLoading = false;
 
   public form!: FormGroup;
   public nzType: NzButtonType = null;
-  public onUpload(event: Event): void {
-    const input = event.target as HTMLInputElement;
-
-    if (!input.files?.length) {
-      return;
-    }
-    console.log(input.files[0]);
-    this.fileChanged.emit(input.files[0]);
-  }
 
   public item = {
     name: 'Не найдено',
@@ -32,10 +25,9 @@ export class CategoryComponent {
   }
 
   constructor(
-    private fb: FormBuilder,
     private readonly iconService: NzIconService,
+    private msg: NzMessageService,
   ) {
-    this.form = this.formInit();
     this.iconService.addIconLiteral('ng-zorro:notfound', searchLiteral);
   }
 
@@ -43,38 +35,32 @@ export class CategoryComponent {
     this.isVisible = true;
   }
 
-  public loadData(file: Blob): void {
-    // this.store.dispatch(
-    //   new LoadCSVData({
-    //     id: this.proposalId,
-    //     file,
-    //   }),
-    // );
-    console.log(file);
-  }
-
-  handleOk(form: FormGroup): void {
-    this.isOkLoading = true;
-    setTimeout(() => {
-      this.isVisible = false;
-      this.isOkLoading = false;
-    }, 3000);
-
-    console.log(form.controls['title'].value);
-  }
-
   handleCancel(): void {
     this.isVisible = false;
   }
 
-  formInit() {
-    return this.fb.group({
-      parentCategoryCode: new FormControl(''),
-      categoryCode: new FormControl(''),
-      title: new FormControl(''),
-      description: new FormControl(''),
-      isAvailable: new FormControl(''),
-      isClassificationAllowed: new FormControl(''),
-    })
+  public filesToBeUploaded!: NzUploadFile[] | null;
+
+  handleChange({ file, fileList }: NzUploadChangeParam): void {
+    if (this.filesToBeUploaded) return;
+
+    const status = file.status;
+    if (status !== 'uploading') {
+    }
+    if (status === 'done') {
+      fileList.forEach(file => {
+        this.msg.success(`"${file.name}" готов к импорту!`);
+      })
+      this.filesToBeUploaded = fileList;
+    } else if (status === 'error') {
+      this.msg.error(`При импорте "${file.name}" произошла ошибка!`);
+    }
   }
+
+  submitData() {
+    console.log(this.filesToBeUploaded);
+    this.isVisible = false;
+    this.filesToBeUploaded = null;
+  }
+
 }
