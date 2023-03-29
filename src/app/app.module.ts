@@ -10,6 +10,8 @@ import { ParrotModule } from './parrot/parrot.module';
 import { RoosterModule } from './rooster/rooster.module';
 import { ChildComponent } from './child/child.component';
 import { GrandChildComponent } from './grand-child/grand-child.component';
+import { MonkeyDirective } from './monkey.directive';
+import { CatDirective } from './cat.directive';
 
 registerLocaleData(en);
 
@@ -19,6 +21,8 @@ registerLocaleData(en);
     ParallaxDirective,
     ChildComponent,
     GrandChildComponent,
+    MonkeyDirective,
+    CatDirective,
   ],
   imports: [
     BrowserModule,

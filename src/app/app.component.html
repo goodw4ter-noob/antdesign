@@ -1,1 +1,4 @@
 <p>app component <strong>{{animalService.emoji}}</strong></p>
+<app-child appMonkey appCat>
+  <app-grand-child style="color: red;"></app-grand-child>  <!-- пойдет в ng-content -->
+</app-child>
