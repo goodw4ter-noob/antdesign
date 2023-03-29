@@ -1,65 +1,38 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { GlobalLayoutComponent } from './global-layout/global-layout.component';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { MainFormComponent } from './main-form/main-form.component';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { SwitcherComponent } from './switcher/switcher.component';
-import { CategoryComponent } from './category/category.component';
-import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { NzUploadModule } from 'ng-zorro-antd/upload';
-import { NzMessageModule } from 'ng-zorro-antd/message';
+import { ParallaxDirective } from './directives/parallax.directive';
+import { AnimalService } from './services/animal.service';
+import { ParrotModule } from './parrot/parrot.module';
+import { RoosterModule } from './rooster/rooster.module';
+import { ChildComponent } from './child/child.component';
+import { GrandChildComponent } from './grand-child/grand-child.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    GlobalLayoutComponent,
-    MainFormComponent,
-    SwitcherComponent,
-    CategoryComponent
+    ParallaxDirective,
+    ChildComponent,
+    GrandChildComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzFormModule,
-    ReactiveFormsModule,
-    NzButtonModule,
-    NzIconModule,
-    NzInputModule,
-    NzSelectModule,
-    NzSwitchModule,
-    NzModalModule,
-    NzToolTipModule,
-    NzUploadModule,
-    NzMessageModule
+    RoosterModule, //2
+    ParrotModule,  //1
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US }
+    // { provide: AnimalService, useValue: { emoji: 'pinguin' } }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// AppModule > prodiveIn: 'root'
+// AppModule > ParrotModule | RoosterModule
+
+// @Component наследуется от @Directive
